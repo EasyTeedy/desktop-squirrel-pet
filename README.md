@@ -19,3 +19,5 @@ Clicking on it will trigger a hurt animation
 Be careful: clicking too often may cause the squirrel to "die" 💀
 
 If that happens, simply restart the program and it will come back to life.
+
+<img width="1698" height="323" alt="image" src="https://github.com/user-attachments/assets/e7d80043-8f63-4ab9-b990-1d70a5b6bdeb" />
