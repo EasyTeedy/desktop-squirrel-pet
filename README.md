@@ -20,10 +20,14 @@ Be careful: clicking too often may cause the squirrel to "die" 💀
 
 If that happens, simply restart the program and it will come back to life.
 
-<img width="1698" height="323" alt="image" src="https://github.com/user-attachments/assets/e7d80043-8f63-4ab9-b990-1d70a5b6bdeb" />
-<img width="258" height="175" alt="image" src="https://github.com/user-attachments/assets/6c0c120d-2111-4cbf-8125-4f6d0344d884" />
-<img width="225" height="191" alt="image" src="https://github.com/user-attachments/assets/acd1c238-0036-49ad-ad62-b22c17874bab" />
+<img width="107" height="100" alt="hopping_left" src="https://github.com/user-attachments/assets/713c1825-d420-436d-ba12-a573f1a8485b" />
 
-<img width="210" height="203" alt="image" src="https://github.com/user-attachments/assets/68f6580c-f550-43b6-9f02-933b8fd1a122" />
-<img width="243" height="161" alt="image" src="https://github.com/user-attachments/assets/89bfd01d-3fbd-4946-be62-130748914f35" />
+<img width="81" height="100" alt="standing_left" src="https://github.com/user-attachments/assets/b490c037-5a38-479e-83b0-c047d1db13b3" />
 
+<img width="81" height="100" alt="head_shaking_left" src="https://github.com/user-attachments/assets/9833cdf5-3bc5-449e-bf0e-e7697da62e4a" />
+
+<img width="96" height="100" alt="digging_left" src="https://github.com/user-attachments/assets/58f9dd8b-0410-4c43-bb9f-161bbfaf5d7b" />
+<img width="71" height="100" alt="eating_left" src="https://github.com/user-attachments/assets/bbcde791-bd46-4ce9-a442-0fd81bd2b9de" />
+
+<img width="76" height="99" alt="get_hurt_left" src="https://github.com/user-attachments/assets/98dae6ec-52b3-445c-a1c5-f2fcab8d4b47" />
+<img width="100" height="100" alt="death_left" src="https://github.com/user-attachments/assets/eaa79fc3-b7e8-4d63-95d0-a1762d3850a1" />
