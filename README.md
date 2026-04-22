@@ -21,3 +21,9 @@ Be careful: clicking too often may cause the squirrel to "die" 💀
 If that happens, simply restart the program and it will come back to life.
 
 <img width="1698" height="323" alt="image" src="https://github.com/user-attachments/assets/e7d80043-8f63-4ab9-b990-1d70a5b6bdeb" />
+<img width="258" height="175" alt="image" src="https://github.com/user-attachments/assets/6c0c120d-2111-4cbf-8125-4f6d0344d884" />
+<img width="225" height="191" alt="image" src="https://github.com/user-attachments/assets/acd1c238-0036-49ad-ad62-b22c17874bab" />
+
+<img width="210" height="203" alt="image" src="https://github.com/user-attachments/assets/68f6580c-f550-43b6-9f02-933b8fd1a122" />
+<img width="243" height="161" alt="image" src="https://github.com/user-attachments/assets/89bfd01d-3fbd-4946-be62-130748914f35" />
+
