@@ -68,16 +68,21 @@ event_number = random.randint(all_probability_array[0], all_probability_array[-1
 # direction variable for the movement and animation selection
 piss_on_wall_bool = False # True = hitting wall, False = not hitting wall
 left_right_bool = False # 0 = rechts, 1 = links
-direction = 1  # 1 = rechts, -1 = links
+direction = 1  # 1 = rechts, -1 = links 
 
-# path vor reading and saving gifs 
-
+# =====================
+# RESOURCE PATH (CROSS PLATFORM)
+# =====================
 def resource_path(relative_path):
+    """ Get absolute path to resource (works for dev + bundled app) """
     if getattr(sys, 'frozen', False):
-        return os.path.join(sys._MEIPASS, relative_path)
-    return os.path.join(os.path.abspath("."), relative_path)
+        base_path = sys._MEIPASS  # for bundled apps (py2app / pyinstaller)
+    else:
+        base_path = os.path.abspath(".")
+    return os.path.join(base_path, relative_path)
 
-impath = resource_path("zugeschnitten_gifs/")
+# Path to your GIF folder
+ASSET_DIR = resource_path("zugeschnitten_gifs")
 
 # =====================
 # QT SETUP
@@ -131,32 +136,45 @@ def death_trigger():
 # =====================
 # GIF LOADER
 # =====================
-def load_gif(path, frame_count):
+def load_gif(name, frame_count):
+    path = os.path.join(ASSET_DIR, name)
+    
+    if not os.path.exists(path):
+        print(f"ERROR: File not found -> {path}")
+    
     frames = []
     movie = QtGui.QMovie(path)
+    
     for i in range(frame_count):
         movie.jumpToFrame(i)
         frames.append(movie.currentPixmap())
+    
     return frames
 
 # =====================
 # LOAD GIFS
 # =====================
 
-death_right = load_gif(os.path.join(impath, 'death_right.gif'), 11)
-death_left = load_gif(os.path.join(impath, impath+'death_left.gif'), 11)
-digging_right = load_gif(os.path.join(impath,impath+'digging_right.gif'), 70)
-digging_left = load_gif(os.path.join(impath, impath+'digging_left.gif'), 70)
-eating_right = load_gif(os.path.join(impath, impath+'eating_right.gif'), 51)
-eating_left = load_gif(os.path.join(impath, impath+'eating_left.gif'), 51)
-get_hurt_right = load_gif(os.path.join(impath, impath+'get_hurt_right.gif'), 6)
-get_hurt_left = load_gif(os.path.join(impath, impath+'get_hurt_left.gif'), 6)
-head_shaking_right = load_gif(os.path.join(impath, impath+'head_shaking_right.gif'), 37)
-head_shaking_left = load_gif(os.path.join(impath, impath+'head_shaking_left.gif'), 37)
-hopping_right = load_gif(os.path.join(impath, impath+'hopping_right.gif'), 47)
-hopping_left = load_gif(os.path.join(impath, impath+'hopping_left.gif'), 47)
-standing_right = load_gif(os.path.join(impath, impath+'standing_right.gif'), 51)
-standing_left = load_gif(os.path.join(impath, impath+'standing_left.gif'), 51)
+death_right = load_gif('death_right.gif', 11)
+death_left = load_gif('death_left.gif', 11)
+
+digging_right = load_gif('digging_right.gif', 70)
+digging_left = load_gif('digging_left.gif', 70)
+
+eating_right = load_gif('eating_right.gif', 51)
+eating_left = load_gif('eating_left.gif', 51)
+
+get_hurt_right = load_gif('get_hurt_right.gif', 6)
+get_hurt_left = load_gif('get_hurt_left.gif', 6)
+
+head_shaking_right = load_gif('head_shaking_right.gif', 37)
+head_shaking_left = load_gif('head_shaking_left.gif', 37)
+
+hopping_right = load_gif('hopping_right.gif', 47)
+hopping_left = load_gif('hopping_left.gif', 47)
+
+standing_right = load_gif('standing_right.gif', 51)
+standing_left = load_gif('standing_left.gif', 51)
 
 # =====================
 # EVENT CHOOSER
