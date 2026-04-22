@@ -7,16 +7,36 @@ from PyQt5 import QtWidgets, QtGui, QtCore
 # GLOBAL STATE
 # =====================
 
-#Start position of the pet
-x = 550
-y_start = 740
+def get_screen_geometry(app):
+    """
+    Returns screen width and height in a cross-platform way.
+    Works on Windows and macOS.
+    """
+    screen = app.primaryScreen().availableGeometry()
+    screen_width = screen.width()
+    screen_height = screen.height()
 
-#boundaries for max left and right movemnet 
+    return screen_width, screen_height
+
+
+# =====================
+# QT APP INITIALIZATION
+# =====================
+app = QtWidgets.QApplication(sys.argv)
+
+# Screen Daten direkt danach holen
+screen_width, screen_height = get_screen_geometry(app)
+
+# Desktop Pet Startposition (unten links)
+x = screen_width // 2
+y_start = screen_height - 70
+# Walk space
 min_x = 328
-max_x = 1000
+max_x = screen_width - 440
+#print(max_x) # DEBUG
 
-#def of the probability of each event:
 
+#def of the probability of each event: DO NOT CHANGE THE NUMBERS IN THE ARRAYS!!! Never change a running SYSTEM! ;)
 death_left_array = [0]
 death_right_array = [1]
 
@@ -87,7 +107,6 @@ ASSET_DIR = resource_path("zugeschnitten_gifs")
 # =====================
 # QT SETUP
 # =====================
-app = QtWidgets.QApplication(sys.argv)
 
 window = QtWidgets.QWidget()
 window.setWindowFlags(QtCore.Qt.FramelessWindowHint | QtCore.Qt.WindowStaysOnTopHint)
