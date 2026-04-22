@@ -6,8 +6,14 @@ from PyQt5 import QtWidgets, QtGui, QtCore
 # =====================
 # GLOBAL STATE
 # =====================
+
+#Start position of the pet
 x = 550
 y_start = 740
+
+#boundaries for max left and right movemnet 
+min_x = 328
+max_x = 1000
 
 #def of the probability of each event:
 
@@ -48,7 +54,6 @@ max_spann_array = len(all_probability_array) # max spann array is the number of 
 
 print ("max spann array:", max_spann_array) # DEBUG
 print("min und max von max spann array:", all_probability_array[0], all_probability_array[-1]) # DEBUG
- # DEBUG
 
 # state vor Death
 death_bool = False # True = death, False = alive
@@ -137,6 +142,7 @@ def load_gif(path, frame_count):
 # =====================
 # LOAD GIFS
 # =====================
+
 death_right = load_gif(os.path.join(impath, 'death_right.gif'), 11)
 death_left = load_gif(os.path.join(impath, impath+'death_left.gif'), 11)
 digging_right = load_gif(os.path.join(impath,impath+'digging_right.gif'), 70)
@@ -203,7 +209,7 @@ def choose_next_event():
 # EVENT LOGIC (KEINE BEWEGUNG HIER!)
 # =====================
 def handle_event():
-    global check, event_number, left_right_bool, direction, piss_on_wall_bool
+    global check, event_number, left_right_bool, direction, piss_on_wall_bool, min_x, max_x
     death_trigger()
 
     # connenctiong probability of an event withe the check variable 
@@ -310,9 +316,6 @@ def update():
     elif check == 11:
         x += 6 * direction
 
-    # WAND LOGIC (sauberer Turn)
-    min_x = 328
-    max_x = 1000
 
     if x >= max_x: # if it hits the right wall and is moving right, change direction to left
         piss_on_wall_bool = True 
@@ -331,8 +334,6 @@ def update():
     # =====================
 
     #Death
-    #print("check:", check) # DEBUG
-
     if check == 0:
         frames = death_left
     elif check == 1:
@@ -346,11 +347,10 @@ def update():
     
     #Eating
     elif check == 4:
-        #print("try eating bool is:", right_left_checker_bool) # DEBUG
         frames = eating_left if left_right_bool == False else eating_right # direction check für sauberen Turn)
     elif check == 5:
-        #print("try eating bool is:", right_left_checker_bool) # DEBUG
         frames = eating_right if left_right_bool == True else eating_left # direction check für sauberen Turn)
+    
     #Standing
     elif check == 6:
         frames = standing_left
@@ -364,9 +364,9 @@ def update():
         frames = head_shaking_right
     
     elif check == 10:
-        frames = hopping_left if direction == -1 else hopping_right # direction check für sauberen Turn
+        frames = hopping_left if direction == -1 else hopping_right # direction check for clean turn
     elif check == 11:
-        frames = hopping_right if direction == 1 else hopping_left # direction check für sauberen Turn
+        frames = hopping_right if direction == 1 else hopping_left # direction check for clean turn
     
     
     # Get Hurt
