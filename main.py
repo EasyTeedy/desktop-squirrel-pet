@@ -36,7 +36,7 @@ max_x = screen_width - 440
 #print(max_x) # DEBUG
 
 
-#def of the probability of each event: DO NOT CHANGE THE NUMBERS IN THE ARRAYS!!! Never change a running SYSTEM! ;)
+#def of the probability of each event: DO NOT CHANGE THE NUMBERS IN THE ARRAYS!!! Never change a running SYSTEM!
 death_left_array = [0]
 death_right_array = [1]
 
