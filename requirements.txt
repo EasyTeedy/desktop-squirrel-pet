@@ -1,4 +1,0 @@
-random
-os
-sys
-PyQt5

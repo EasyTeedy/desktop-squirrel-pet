@@ -124,7 +124,7 @@ def on_click(event):
     global event_number, cycle, target_duration, left_right_bool, counter_hit
 
     counter_hit+=1
-    event_number = gethurt_left_array[0] if left_right_bool == False else gethurt_right_array[0] # bool false = left if bool true = right
+    event_number = gethurt_left_array[0] if not left_right_bool else gethurt_right_array[0] # bool false = left if bool true = right
     cycle = 0
 
     target_duration = 8
@@ -145,7 +145,7 @@ def death_trigger():
     global counter_hit, event_number, target_duration, death_bool
 
     if counter_hit >= 5:
-        event_number = death_left_array[0] if left_right_bool == False else death_right_array[0] # bool false = left if bool true = right
+        event_number = death_left_array[0] if not left_right_bool else death_right_array[0] # bool false = left if bool true = right
         #target_duration = 12
         death_bool = True
 
@@ -256,7 +256,7 @@ def handle_event():
     # for right left check in the animation selection in the update loop
 
     #death
-    if event_number == death_left_array[0] and left_right_bool == False: # left death
+    if event_number == death_left_array[0] and not left_right_bool: # left death
         check = 0
         left_right_bool = False
     elif event_number == death_right_array[0]: # right death
@@ -274,11 +274,11 @@ def handle_event():
         direction = 1
 
     #eating
-    elif event_number in eating_array and left_right_bool == False: # left eating
+    elif event_number in eating_array and not left_right_bool: # left eating
         check = 4
         direction = -1
         #left_right_bool = False
-    elif event_number in eating_array and left_right_bool == True: # right eating
+    elif event_number in eating_array and left_right_bool: # right eating
         check = 5
         direction = 1
         #left_right_bool = True
@@ -287,7 +287,7 @@ def handle_event():
     elif event_number in standing_left_array:
         check = 6
         left_right_bool = False
-        if piss_on_wall_bool == True: # if it is hitting a wall, it can randomly change direction or keep it, for more variety
+        if piss_on_wall_bool: # if it is hitting a wall, it can randomly change direction or keep it, for more variety
             direction = random.choice([1, -1]) # if it is not hitting a wall, it can randomly change direction or keep it, for more variety
             piss_on_wall_bool = False # reset the bool for the next wall hit
             print("random direction:", direction) # DEBUG
@@ -297,7 +297,7 @@ def handle_event():
     elif event_number in standing_right_array:
         check = 7
         left_right_bool = True
-        if piss_on_wall_bool == True: # if it is hitting a wall, it can randomly change direction or keep it, for more variety
+        if piss_on_wall_bool: # if it is hitting a wall, it can randomly change direction or keep it, for more variety
             direction = random.choice([1, -1]) # if it is not hitting a wall, it can randomly change direction or keep it, for more variety
             piss_on_wall_bool = False # reset the bool for the next wall hit
             print("random direction:", direction) # DEBUG
@@ -305,11 +305,11 @@ def handle_event():
             direction = 1
     
     #head shaking
-    elif event_number in headshaking_array and left_right_bool == False:
+    elif event_number in headshaking_array and not left_right_bool:
         check = 8
         direction = -1
         
-    elif event_number in headshaking_array and left_right_bool == True:
+    elif event_number in headshaking_array and left_right_bool:
         check = 9
         direction = 1
     
@@ -384,9 +384,9 @@ def update():
     
     #Eating
     elif check == 4:
-        frames = eating_left if left_right_bool == False else eating_right # direction check für sauberen Turn)
+        frames = eating_left if not left_right_bool else eating_right # direction check für sauberen Turn)
     elif check == 5:
-        frames = eating_right if left_right_bool == True else eating_left # direction check für sauberen Turn)
+        frames = eating_right if left_right_bool else eating_left # direction check für sauberen Turn)
     
     #Standing
     elif check == 6:
@@ -431,7 +431,7 @@ def update():
     cycle += 1
 
     if cycle >= target_duration:    
-        if death_bool == True:
+        if death_bool:
             print("PET is dead. restart to survive...") # DEBUG
             timer.stop()
         else:
