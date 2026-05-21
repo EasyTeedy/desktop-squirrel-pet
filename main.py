@@ -1,11 +1,23 @@
 import sys
+import os
 import random
-from PyQt5 import QtWidgets, QtCore
-from globals import *
+from PyQt5 import QtWidgets, QtGui, QtCore
 
-from source.screen_geometry import get_screen_geometry
-from interaktiv import on_click, death_trigger
-from source.read_data import load_gif
+# =====================
+# GLOBAL STATE
+# =====================
+
+def get_screen_geometry(app):
+    """
+    Returns screen width and height in a cross-platform way.
+    Works on Windows and macOS.
+    """
+    screen = app.primaryScreen().availableGeometry()
+    screen_width = screen.width()
+    screen_height = screen.height()
+
+    return screen_width, screen_height
+
 
 # =====================
 # QT APP INITIALIZATION
@@ -78,6 +90,19 @@ piss_on_wall_bool = False # True = hitting wall, False = not hitting wall
 left_right_bool = False # 0 = rechts, 1 = links
 direction = 1  # 1 = rechts, -1 = links 
 
+# =====================
+# RESOURCE PATH (CROSS PLATFORM)
+# =====================
+def resource_path(relative_path):
+    """ Get absolute path to resource (works for dev + bundled app) """
+    if getattr(sys, 'frozen', False):
+        base_path = sys._MEIPASS  # for bundled apps (py2app / pyinstaller)
+    else:
+        base_path = os.path.abspath(".")
+    return os.path.join(base_path, relative_path)
+
+# Path to your GIF folder
+ASSET_DIR = resource_path("zugeschnitten_gifs")
 
 # =====================
 # QT SETUP
@@ -94,10 +119,56 @@ label.setStyleSheet("background: transparent;")
 # CLICK EVENT
 # =====================
 
+def on_click(event):
+    global gethurt_left_array, gethurt_right_array
+    global event_number, cycle, target_duration, left_right_bool, counter_hit
+
+    counter_hit+=1
+    event_number = gethurt_left_array[0] if not left_right_bool else gethurt_right_array[0] # bool false = left if bool true = right
+    cycle = 0
+
+    target_duration = 8
+
+    #target_duration = 80
+    #event_number = random.choice(hopping_left_array)
+    print("Event number:", event_number) # after get hurt the pet is more likely to hop, because it is scared, but it can also do any other event, just for more variety
+# Mausklick aufgezeichnet und aufgerufen
 label.mousePressEvent = on_click
 
 
 
+# =====================
+# Death hitting PET
+# =====================
+def death_trigger():
+    global death_left_array, death_right_array, left_right_bool
+    global counter_hit, event_number, target_duration, death_bool
+
+    if counter_hit >= 5:
+        event_number = death_left_array[0] if not left_right_bool else death_right_array[0] # bool false = left if bool true = right
+        #target_duration = 12
+        death_bool = True
+
+    #print("counter_hit:", counter_hit) # DEBUG
+
+
+# =====================
+# GIF LOADER
+# =====================
+def load_gif(name, frame_count):
+    path = os.path.join(ASSET_DIR, name)
+    
+    if not os.path.exists(path):
+        print(f"ERROR: File not found -> {path}")
+    
+    frames = []
+    movie = QtGui.QMovie(path)
+    
+    for i in range(frame_count):
+        movie.jumpToFrame(i)
+        frames.append(movie.currentPixmap())
+    
+    return frames
 
 # =====================
 # LOAD GIFS
