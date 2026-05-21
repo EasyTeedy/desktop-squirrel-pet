@@ -5,13 +5,11 @@ description = "Default template for PDM package"
 authors = [
     {name = "Cedric Rissi", email = "cedric.rissi2003@gmail.com"},
 ]
-dependencies = [
-    "PyQt6>=6.11.0",
-    "Pyqt5>=5.15.11",
-]
-requires-python = "==3.13.*"
+dependencies = ["PyQt5>=5.15.11"]
+requires-python = "==3.9.*"
 readme = "README.md"
 license = {text = "MIT"}
+
 
 [tool.pdm]
 distribution = false
